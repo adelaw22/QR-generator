@@ -1,9 +1,19 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import { InputContext } from '../App'
 import { ChromePicker } from 'react-color'
 
 const InputColor = () => {
   const [color, setColor] = useState('#054080')
   const [displayColorPicker, setDisplayColorPicker] = useState(false)
+
+  const { inputValue, setInputValue } = useContext(InputContext)
+
+  useEffect(
+    (color) => {
+      setInputValue({ ...inputValue, color: color })
+    },
+    [color],
+  )
 
   const handleColorChange = (color) => setColor(color.hex)
 
